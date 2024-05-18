@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
@@ -23,11 +24,13 @@ class _AuthPageState extends State<AuthPage> {
     try {
       final data = json.encode({
         'username': userNameController.text,
-        'password': passwordController.text,
+        'password': passwordController.text
       });
 
       final response =
           await dio.post('https://dummyjson.com/auth/login', data: data);
+
+      log(response.toString());
       final token = response.data['token'];
       // ignore: use_build_context_synchronously
       Navigator.of(context).push(
