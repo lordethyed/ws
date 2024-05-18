@@ -52,6 +52,10 @@ class _AuthPageState extends State<AuthPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        actions: [],
+        leading: const SizedBox(
+          width: 5,
+        ),
         centerTitle: true,
         backgroundColor: Colors.red,
         title: const Text(

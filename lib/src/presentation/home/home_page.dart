@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:ws/src/data/products_model.dart';
 import 'package:ws/src/presentation/home/add_time_page.dart';
 import 'package:ws/src/presentation/home/categories_page.dart';
+import 'package:ws/src/presentation/home/logout_page.dart';
 import 'package:ws/src/presentation/home/notification_page.dart';
 import 'package:ws/src/presentation/home/search_page.dart';
+import 'package:ws/src/presentation/home/user_page.dart';
 import 'package:ws/src/presentation/home/widgets/product_tile.dart';
 
 class HomePage extends StatefulWidget {
@@ -57,7 +59,7 @@ class _HomePageState extends State<HomePage> {
               builder: (context) => SearchPage(token: widget.token),
             ),
           ),
-          icon: const Icon(Icons.search),
+          icon: const Icon(Icons.search, color: Colors.white),
         ),
         actions: [
           IconButton(
@@ -66,7 +68,28 @@ class _HomePageState extends State<HomePage> {
                 builder: (context) => const NotificationPage(),
               ),
             ),
-            icon: const Icon(Icons.notifications),
+            icon: const Icon(Icons.notifications, color: Colors.white),
+          ),
+          IconButton(
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const LogOutPage(),
+              ),
+            ),
+            icon: const Icon(Icons.login, color: Colors.white),
+          ),
+          IconButton(
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => UserPage(
+                  token: widget.token,
+                ),
+              ),
+            ),
+            icon: const Icon(
+              Icons.person,
+              color: Colors.white,
+            ),
           ),
           TextButton(
             onPressed: () => Navigator.of(context).push(
