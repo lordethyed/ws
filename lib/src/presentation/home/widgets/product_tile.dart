@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:ws/src/data/products_model.dart';
+import 'package:ws/src/presentation/home/widgets/product_details_page.dart';
 
 class ProductTile extends StatelessWidget {
   const ProductTile({super.key, required this.product});
@@ -11,18 +11,22 @@ class ProductTile extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(10.0),
       decoration: BoxDecoration(
-        color: Colors.grey.shade100,
-        borderRadius: BorderRadius.circular(25.0)
-      ),
+          color: Colors.grey.shade100,
+          borderRadius: BorderRadius.circular(25.0)),
       width: 150,
       height: 150,
       child: InkWell(
-        onTap: () {},
+        onTap: () => Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => ProductDeailsPage(
+                  product: product,
+                ))),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
-              borderRadius: const BorderRadius.only(topLeft: Radius.circular(25.0), topRight: Radius.circular(25.0)),
+              borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(25.0),
+                  topRight: Radius.circular(25.0)),
               child: SizedBox(
                 width: MediaQuery.sizeOf(context).width,
                 height: 100,
@@ -37,28 +41,28 @@ class ProductTile extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                width: 150,
-                child: Text(
-                  product.title!,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              SizedBox(
-                width: 150,
-                height: 45,
-                child: Text(
-                  product.description!,
-                  style: const TextStyle(fontSize: 12),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              Text(
-                "${product.price!.toString()}\$",
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
+                    width: 150,
+                    child: Text(
+                      product.title!,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 150,
+                    height: 45,
+                    child: Text(
+                      product.description!,
+                      style: const TextStyle(fontSize: 12),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Text(
+                    "${product.price!.toString()}\$",
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ],
               ),
             ),

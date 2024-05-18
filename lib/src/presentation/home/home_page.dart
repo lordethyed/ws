@@ -1,10 +1,9 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:ws/src/data/products_model.dart';
+import 'package:ws/src/presentation/home/add_time_page.dart';
 import 'package:ws/src/presentation/home/search_page.dart';
 import 'package:ws/src/presentation/home/widgets/product_tile.dart';
 
@@ -43,7 +42,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const AddItem())),
         child: const Icon(Icons.add),
       ),
       appBar: AppBar(
