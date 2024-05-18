@@ -61,15 +61,22 @@ class _AddItemState extends State<AddItem> {
                 const Row(),
                 const Text(
                   "Create a new product",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold),
                 ),
-                const Text('Item Information'),
                 SizedBox(
                   width: 300,
                   height: 500,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
+                      const Text(
+                        'Item Information',
+                        style: TextStyle(
+                            fontSize: 22, fontWeight: FontWeight.bold),
+                      ),
                       TextField(
                         decoration: InputDecoration(
                           fillColor: Colors.grey,
@@ -144,13 +151,37 @@ class _AddItemState extends State<AddItem> {
                       ),
                       Row(
                         children: [
-                          TextButton(
-                            onPressed: () => Navigator.of(context).pop(),
-                            child: const Text(
-                              'Cancel',
-                              style: TextStyle(color: Colors.grey),
+                          SizedBox(
+                            width: 100,
+                            child: TextButton(
+                              onPressed: () => Navigator.of(context).pop(),
+                              style: const ButtonStyle(
+                                backgroundColor:
+                                    MaterialStatePropertyAll(Colors.grey),
+                              ),
+                              child: const Text(
+                                'Cancel',
+                                style: TextStyle(color: Colors.black),
+                              ),
                             ),
-                          )
+                          ),
+                          SizedBox(
+                            width: 200,
+                            child: TextButton(
+                              onPressed: () {
+                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Product saved succsesfully')));
+                                Navigator.of(context).pop();
+                              },
+                              style: const ButtonStyle(
+                                backgroundColor:
+                                    MaterialStatePropertyAll(Colors.red),
+                              ),
+                              child: const Text(
+                                'Register',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
                         ],
                       )
                     ],

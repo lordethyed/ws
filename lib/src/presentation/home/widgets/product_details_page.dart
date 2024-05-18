@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:ws/src/data/products_model.dart';
+import 'package:ws/src/presentation/home/widgets/message_page.dart';
 
 class ProductDeailsPage extends StatelessWidget {
   const ProductDeailsPage({super.key, required this.product});
@@ -89,7 +90,7 @@ class ProductDeailsPage extends StatelessWidget {
                   style: ButtonStyle(
                     backgroundColor: MaterialStatePropertyAll(Colors.grey.shade800),
                   ),
-                  onPressed: () {},
+                  onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => MessagePage(product: product))),
                   child: const Text('Message', style: TextStyle(color: Colors.white),),
                 )
               ],

@@ -4,6 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:ws/src/data/products_model.dart';
 import 'package:ws/src/presentation/home/add_time_page.dart';
+import 'package:ws/src/presentation/home/categories_page.dart';
+import 'package:ws/src/presentation/home/notification_page.dart';
 import 'package:ws/src/presentation/home/search_page.dart';
 import 'package:ws/src/presentation/home/widgets/product_tile.dart';
 
@@ -42,7 +44,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const AddItem())),
+        onPressed: () => Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const AddItem())),
         child: const Icon(Icons.add),
       ),
       appBar: AppBar(
@@ -58,11 +61,19 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const NotificationPage(),
+              ),
+            ),
             icon: const Icon(Icons.notifications),
           ),
           TextButton(
-            onPressed: () {},
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const CategoriesPage(),
+              ),
+            ),
             child: const Text(
               'Categories',
               style: TextStyle(color: Colors.white),
