@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:ws/src/data/products_model.dart';
+import 'package:ws/src/presentation/home/widgets/product_details_page.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key, required this.token});
@@ -68,8 +69,18 @@ class _SearchPageState extends State<SearchPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text("Hello ", style: TextStyle(color: Colors.red, fontSize: 22, fontWeight: FontWeight.bold),),
-              Text("$user", style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
+              const Text(
+                "Hello ",
+                style: TextStyle(
+                    color: Colors.red,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold),
+              ),
+              Text(
+                "$user",
+                style:
+                    const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              ),
             ],
           ),
           const Text('Please type for search by item name.'),
@@ -93,25 +104,33 @@ class _SearchPageState extends State<SearchPage> {
             Expanded(
               child: ListView.builder(
                 itemCount: products.length,
-                itemBuilder: (context, index) => ListTile(
-                  leading: Image.network(products[index].images!.first),
-                  title: Text(products[index].title!),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        products[index].description!,
-                        style: const TextStyle(
-                          overflow: TextOverflow.ellipsis,
+                itemBuilder: (context, index) => InkWell(
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          ProductDeailsPage(product: products[index]),
+                    ),
+                  ),
+                  child: ListTile(
+                    leading: Image.network(products[index].images!.first),
+                    title: Text(products[index].title!),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          products[index].description!,
+                          style: const TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
-                      ),
-                      Text(
-                        '\$${products[index].price}',
-                        style: const TextStyle(
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      )
-                    ],
+                        Text(
+                          '\$${products[index].price}',
+                          style: const TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
