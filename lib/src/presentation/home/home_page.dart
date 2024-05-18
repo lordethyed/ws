@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:ws/src/data/products_model.dart';
+import 'package:ws/src/presentation/home/search_page.dart';
+import 'package:ws/src/presentation/home/widgets/product_tile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.token});
@@ -40,111 +42,98 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          child: const Icon(Icons.add),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.add),
+      ),
+      appBar: AppBar(
+        backgroundColor: Colors.red,
+        centerTitle: true,
+        leading: IconButton(
+          onPressed: () => Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => SearchPage(token: widget.token),
+            ),
+          ),
+          icon: const Icon(Icons.search),
         ),
-        appBar: AppBar(
-          backgroundColor: Colors.red,
-          centerTitle: true,
-          leading: IconButton(
+        actions: [
+          IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.search),
+            icon: const Icon(Icons.notifications),
           ),
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.notifications),
+          TextButton(
+            onPressed: () {},
+            child: const Text(
+              'Categories',
+              style: TextStyle(color: Colors.white),
             ),
-            TextButton(
-              onPressed: () {},
-              child: const Text(
-                'Categories',
-                style: TextStyle(color: Colors.white),
-              ),
-            )
-          ],
-          title: const Text(
-            'Korea - GoYang',
-            style: TextStyle(
-              color: Colors.white,
-            ),
+          )
+        ],
+        title: const Text(
+          'Korea - GoYang',
+          style: TextStyle(
+            color: Colors.white,
           ),
         ),
-        body: isLoading
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
-            : SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.sizeOf(context).width,
-                      height: 200,
-                      child: Image.asset(
-                        'assets/images/Imagen 18.png',
-                        fit: BoxFit.cover,
+      ),
+      body: isLoading
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  SizedBox(
+                    width: MediaQuery.sizeOf(context).width,
+                    height: 200,
+                    child: Image.asset(
+                      'assets/images/Imagen 18.png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  const Text(
+                    'Lastest Items',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 23,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    width: MediaQuery.sizeOf(context).width,
+                    height: 250,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 2,
+                      itemBuilder: (context, index) => ProductTile(
+                        product: products[index],
                       ),
                     ),
-                    const Text(
-                      'Lastest Items',
-                      style: TextStyle(
-                        color: Colors.red,
-                        fontSize: 23,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  ),
+                  const Text(
+                    'Yout Publications',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 23,
+                      fontWeight: FontWeight.bold,
                     ),
-                    SizedBox(
-                      width: MediaQuery.sizeOf(context).width,
-                      height: 150,
-                      child: ListView.builder(
-                          itemBuilder: (context, index) => Container(
-                                margin: const EdgeInsets.all(10.0),
-                                width: 100,
-                                height: 150,
-                                child: InkWell(
-                                  onTap: () {},
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      SizedBox(
-                                        width: 100,
-                                        height: 50,
-                                        child: Image.network(
-                                          products[index].images!.first,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 50,
-                                        child: Text(
-                                          products[index].title!,
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 100,
-                                        child: Text(
-                                          products[index].description!,
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                      ),
-                                      Text(
-                                        "${products[index].price!.toString()}\$",
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              )),
-                    )
-                  ],
-                ),
-              ));
+                  ),
+                  SizedBox(
+                    width: MediaQuery.sizeOf(context).width,
+                    height: 400,
+                    child: GridView.count(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 1 / 0.8,
+                      scrollDirection: Axis.vertical,
+                      children:
+                          products.map((e) => ProductTile(product: e)).toList(),
+                    ),
+                  )
+                ],
+              ),
+            ),
+    );
   }
 }
